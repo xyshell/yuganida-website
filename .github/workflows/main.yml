@@ -30,25 +30,33 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Prepare Node env
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Cache NPM dependencies
-        uses: actions/cache@v2
+      # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
         with:
           path: node_modules
-          key: ${{ runner.OS }}-npm-cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.OS }}-npm-cache
-
-      - name: Build
+            ${{ runner.os }}-node-
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      
+      # Deploy hexo blog website.
+      - name: Deploy
+        id: deploy
+        uses: sma11black/hexo-action@v1.0.3
+        with:
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          user_name: Yuganida  # (or delete this input setting to use bot account)
+          user_email: yuganidaart@gmail.com  # (or delete this input setting to use bot account)
+          commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
+    
+      # Use the output from the `deploy` step(use for test action)
+      - name: Get the output
         run: |
-          npm i -g hexo-cli
-          npm install hexo-deployer-git
-          npm i
-          hexo clean && hexo g
+          echo "${{ steps.deploy.outputs.notify }}"
       
       # - name: Deploy
       #   uses: JamesIves/github-pages-deploy-action@v4.3.3
@@ -70,5 +78,3 @@ jobs:
       #     user_email: yuganidaart@gmail.com  # (or delete this input setting to use bot account)
       #     commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
 
-      - name: Deploy
-        run: hexo d

@@ -105,7 +105,6 @@ deploy:
   type: git
   repo: https://github.com/Yuganida/Yuganida.github.io.git
   branch: main
-  token: $secrets.DEPLOY_KEY
 
 # Header
 menu:
