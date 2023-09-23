@@ -48,9 +48,24 @@ jobs:
           npm i -g hexo-cli
           npm i
           hexo clean && hexo g
+      
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@v4.3.3
+      #   with:
+      #     ssh-key: ${{ secrets.DEPLOY_KEY }}
+      #     repository-name: Yuganida/Yuganida.github.io
+      #     branch: main # The branch the action should deploy to.
+      #     folder: public # The folder the action should deploy.
+      #     single-commit: true
+      #     commit-message: "Deploy by source"
 
+      # Deploy hexo blog website.
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        id: deploy
+        uses: sma11black/hexo-action@v1.0.3
         with:
-          github_token: ${{ secrets.DEPLOY_KEY }}
-          publish_dir: ./public
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          user_name: Yuganida  # (or delete this input setting to use bot account)
+          user_email: yuganidaart@gmail.com  # (or delete this input setting to use bot account)
+          commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
+
