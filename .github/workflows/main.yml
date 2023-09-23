@@ -35,18 +35,22 @@ jobs:
         with:
           node-version: 16
 
-      - name: Hexo
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+
+      - name: Build
         run: |
           npm i -g hexo-cli
           npm i
           hexo clean && hexo g
-      
+
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
-          repository-name: Yuganida/Yuganida.github.io
-          branch: main # The branch the action should deploy to.
-          folder: public # The folder the action should deploy.
-          single-commit: true
-          commit-message: "Deploy by source"
+          github_token: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./public
