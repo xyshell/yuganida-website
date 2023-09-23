@@ -103,7 +103,7 @@ theme: edinburgh
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:Yuganida/Yuganida.github.io.git
+  repo: https://github.com/Yuganida/Yuganida.github.io.git
   branch: main
   token: $secrets.DEPLOY_KEY
 
