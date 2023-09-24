@@ -109,7 +109,7 @@ deploy:
 # Header
 menu:
   Gallery: /gallery
-  Category: /category
+  Category: /
   About Me: /about
   Contact: /contact
   Instagram: https://www.instagram.com/yuganida_art/
