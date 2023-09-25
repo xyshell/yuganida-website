@@ -1,3 +1,9 @@
-<% page.posts.forEach(function(item){ %>
-    <%- partial('_partial/portfolio-index', {item: item}) %>
+<%
+    galleryColNum = 4;
+%>
+
+<% site.posts.forEach(function(post){ %>
+    <% if (post.title === "gallery") { %>
+        <%- partial('_partial/gallery', {item: post, colNum: galleryColNum}) %>
+    <% } %>
 <% }); %>

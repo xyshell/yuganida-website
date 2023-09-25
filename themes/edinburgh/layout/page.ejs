@@ -1,1 +1,15 @@
-<%- partial('_partial/page-full', {item: page}) %>
+<% if ((page.layout === "page") && page.source.includes("index")) { %>
+    <%- partial('_partial/page-full', {item: page}) %>
+<% } else if (page.layout === "page") { %>
+    <%- partial('_partial/portfolio-full', {item: page}) %>
+<% } else if (page.layout === "group") { %>
+    <% site.pages.forEach(function(subpage){ %>
+        <% if (subpage.source.includes(page.title.toLowerCase()) && (subpage.source != page.source)) { %>
+            <%- partial('_partial/portfolio-index', {item: subpage}) %>
+        <% } %>
+    <% }); %>
+<% } else { %>
+    <!-- placeholder -->
+<% } %>
+
+

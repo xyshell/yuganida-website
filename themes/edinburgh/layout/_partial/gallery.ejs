@@ -1,0 +1,31 @@
+<%
+function generateGallery(photos, colNum) {
+    const gallery = {};
+
+    for (let i = 0; i < photos.length; i++) {
+        const photo = photos[i];
+        const colIndex = `col${i % colNum}`;
+        
+        if (!gallery[colIndex]) {
+        gallery[colIndex] = [];
+        }
+        
+        gallery[colIndex].push(photo);
+    }
+
+    return gallery;
+}
+const gallery = generateGallery(item.photos, colNum);
+styleAttr = `flex: ${100 / colNum}%; max-width: ${100 / colNum}%`;
+%>
+
+<div class="gallery-row">
+    <% for (const key in gallery) { %>
+        <div class="gallery-column" style="<%= styleAttr %>">
+            <% gallery[key].forEach(function(photo) { %>
+                <img src="<%= photo %>" alt="">
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+

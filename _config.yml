@@ -108,8 +108,9 @@ deploy:
 
 # Header
 menu:
-  Gallery: /gallery
-  Category: /
+  Gallery: /
+  Illustration: /illustration
+  Handicraft: /handicraft
   About Me: /about
   Contact: /contact
   Instagram: https://www.instagram.com/yuganida_art/

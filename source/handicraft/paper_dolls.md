@@ -13,8 +13,8 @@ cover_image: images/paper_dolls.gif
 
 ## Autumn
 
-<img src="/images/paper_dolls_summer.jpg" alt="paper_dolls_summer" width="100%">
+<img src="/images/paper_dolls_autumn.jpg" alt="paper_dolls_autumn" width="100%">
 
 ## Winter
 
-<img src="/images/paper_dolls_summer.jpg" alt="paper_dolls_summer" width="100%">
+<img src="/images/paper_dolls_winter.jpg" alt="paper_dolls_winter" width="100%">
